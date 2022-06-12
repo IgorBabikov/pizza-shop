@@ -10,7 +10,6 @@ const categories = [
 ];
 
 
-
 function Categories() {
   const [activeIndex, setActiveIndex] = useState(0)
 
