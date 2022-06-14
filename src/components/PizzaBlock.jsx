@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+
 const typePizzaName = ['тонкое', 'традиционное'];
 
 function PizzaBlock({ imageUrl, title, price, types, sizes }) {
