@@ -1,4 +1,4 @@
-import { Categories, Sort, PizzaBlock, Skeleton } from './';
+import { Categories, Sort, PizzaBlock, Skeleton } from '.';
 import { getPizzas } from '../services/getData';
 import { useEffect, useState } from 'react';
 
