@@ -1,17 +1,14 @@
 import { Categories, Sort, PizzaBlock, Skeleton } from '.';
-import { getPizzas } from '../services/getData';
-import { useEffect, useState } from 'react';
+import { setFetchPizzas } from '../redux/actions/pizzas';
+import { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux'
 
 function Home() {
-  const [pizzas, setPizzas] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {loading, pizzas} = useSelector(state => state.pizzas)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    getPizzas()
-      .then((res) => {
-        setPizzas(res)
-        setIsLoading(false)
-      })
+    dispatch(setFetchPizzas())
   }, []);
 
   return (
@@ -25,7 +22,7 @@ function Home() {
 
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-          {isLoading
+          {loading
             ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
             : pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)}
         </div>
