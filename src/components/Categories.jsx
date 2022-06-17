@@ -1,27 +1,33 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortCategory } from '../redux/actions/sort';
 
-const categories = [
-  { name: 'Все', type: 'all' },
-  { name: 'Мясные', type: 'meat' },
-  { name: 'Вегетарианская', type: 'vegetarian' },
-  { name: 'Гриль', type: 'grill' },
-  { name: 'Острые', type: 'sharp' },
-  { name: 'Закрытые', type: 'closed' },
+const categoriesList = [
+  { name: 'Все', type: 0 },
+  { name: 'Мясные', type: 1 },
+  { name: 'Вегетарианская', type: 2 },
+  { name: 'Гриль', type: 3 },
+  { name: 'Острые', type: 4 },
+  { name: 'Закрытые', type: 5 },
 ];
 
-
 function Categories() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const { category } = useSelector((state) => state.sort);
+  const dispatch = useDispatch();
 
-  const onAddIndex = (index) => {
-    setActiveIndex(index)
-  }
+  const handleCategory = (type) => {
+    dispatch(setSortCategory(type));
+  };
 
   return (
     <div className="categories">
       <ul>
-        {categories.map((item, i) => (
-          <li onClick={() => onAddIndex(i)} className={activeIndex === i ? 'active': ''} key={item.name}>{item.name}</li>
+        {categoriesList.map((item) => (
+          <li
+            onClick={() => handleCategory(item.type)}
+            className={category === item.type ? 'active' : ''}
+            key={item.name}>
+            {item.name}
+          </li>
         ))}
       </ul>
     </div>

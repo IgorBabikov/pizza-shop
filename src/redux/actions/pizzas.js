@@ -1,13 +1,14 @@
  import {getPizzas} from '../../services/getPizzas'
 
- export const setFetchPizzas = () => dispatch => {
-   getPizzas()
+ export const setFetchPizzas = (categories) => dispatch => {
+   getPizzas(categories)
    .then((data) => dispatch(setPizzas(data)))
+   dispatch(setLoaded(false))
  }
 
-export const setIsLoading = (loading) => ({
-   type: 'SET_LOADING',
-   payload: loading
+export const setLoaded = (loaded) => ({
+   type: 'SET_LOADED',
+   payload: loaded
 })
 
 

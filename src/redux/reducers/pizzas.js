@@ -1,21 +1,21 @@
 const initialState = {
-   loading: true,
+   loaded: false,
    pizzas: []
 }
 
 const pizzas = (state = initialState, action) => {
    switch(action.type) {
-      case 'SET_LOADING':
+      case 'SET_LOADED':
          return {
             ...state,
-            loading: action.payload
+            loaded: action.payload
          }
 
          case 'SET_PIZZAS':
          return {
             ...state,
             pizzas: action.payload,
-            loading: false
+            loaded: true
          }
 
       default: return state

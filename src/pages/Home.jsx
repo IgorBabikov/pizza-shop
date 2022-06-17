@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 
 function Home() {
-  const {loading, pizzas} = useSelector(state => state.pizzas)
+  const {loaded, pizzas} = useSelector(state => state.pizzas)
   const dispatch = useDispatch()
+  const {category} = useSelector(state => state.sort)
 
   useEffect(() => {
-    dispatch(setFetchPizzas())
-  }, []);
+    dispatch(setFetchPizzas(category))
+  }, [category]);
 
   return (
     <div className="content">
@@ -22,7 +23,7 @@ function Home() {
 
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-          {loading
+          {!loaded
             ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
             : pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)}
         </div>
