@@ -1,6 +1,6 @@
 const initialState = {
    category: 0,
-   sortBy: 0
+   sortBy: 'rating'
 }
 
 const sort = (state = initialState, action) => {

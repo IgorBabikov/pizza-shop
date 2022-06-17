@@ -1,20 +1,33 @@
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortBy } from '../redux/actions/sort';
 
-const sortName = ['популярности', 'цене', 'алфавиту'];
+const sortName = [
+  { name: 'популярности (DESC)', type: 'rating' },
+  { name: 'популярности (ASC)', type: '-rating' },
+  { name: 'цене (DESC)', type: 'price' },
+  { name: 'цене (ASC)', type: '-price' },
+  { name: 'алфавиту', type: 'title' },
+];
 
 function Sort() {
   const [sortPopup, setSortPopup] = useState(false);
-  const [activeSort, setActiveSort] = useState(0);
+  const [activeSort, setActiveSort] = useState(0)
+
+  const dispatch = useDispatch();
+
+  const { sortBy } = useSelector((state) => state.sort);
+  const activeLabel = sortName[activeSort].name
 
   const sortRef = useRef();
-  const activeLabelSort = sortName[activeSort];
 
   const showSortPopup = () => {
     setSortPopup((prev) => !prev);
   };
 
-  const addActiveSort = (index) => {
-    setActiveSort(index);
+  const addActiveSort = (type, index) => {
+    dispatch(setSortBy(type));
+    setActiveSort(index)
     setSortPopup(false);
   };
 
@@ -43,17 +56,17 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={showSortPopup}>{activeLabelSort}</span>
+        <span onClick={showSortPopup}>{activeLabel}</span>
       </div>
       {sortPopup && (
         <div className="sort__popup">
           <ul>
             {sortName.map((item, i) => (
               <li
-                onClick={() => addActiveSort(i)}
-                className={activeSort === i ? 'active' : ''}
-                key={item}>
-                {item}
+                onClick={() => addActiveSort(item.type, i)}
+                className={sortBy === item.type ? 'active' : ''}
+                key={item.name}>
+                {item.name}
               </li>
             ))}
           </ul>

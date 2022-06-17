@@ -4,13 +4,14 @@ import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 
 function Home() {
-  const {loaded, pizzas} = useSelector(state => state.pizzas)
   const dispatch = useDispatch()
-  const {category} = useSelector(state => state.sort)
+
+  const {loaded, pizzas} = useSelector(state => state.pizzas)
+  const {category, sortBy} = useSelector(state => state.sort)
 
   useEffect(() => {
-    dispatch(setFetchPizzas(category))
-  }, [category]);
+    dispatch(setFetchPizzas(category, sortBy))
+  }, [category, sortBy]);
 
   return (
     <div className="content">
