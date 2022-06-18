@@ -13,3 +13,8 @@ export const setSearch = (value) => ({
   type: 'SET_SEARCH',
   payload: value
 })
+
+export const setPage = (value) => ({
+  type: 'SET_PAGE',
+  payload: value
+})

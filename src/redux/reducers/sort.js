@@ -1,7 +1,8 @@
 const initialState = {
    category: 0,
    sortBy: 'rating',
-   search: ''
+   search: '',
+   currentPage: 1
 }
 
 const sort = (state = initialState, action) => {
@@ -22,6 +23,12 @@ const sort = (state = initialState, action) => {
          return {
             ...state,
             search: action.payload,
+         }
+
+       case 'SET_PAGE':
+         return {
+            ...state,
+            currentPage: action.payload,
          }
 
       default: return state

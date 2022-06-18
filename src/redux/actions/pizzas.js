@@ -1,7 +1,7 @@
  import {getPizzas} from '../../services/getPizzas'
 
- export const setFetchPizzas = (categories, sortBy) => dispatch => {
-   getPizzas(categories, sortBy)
+ export const setFetchPizzas = (categories, sortBy, currentPage) => dispatch => {
+   getPizzas(categories, sortBy, currentPage)
    .then((data) => dispatch(setPizzas(data)))
    dispatch(setLoaded(false))
  }
