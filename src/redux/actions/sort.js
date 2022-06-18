@@ -8,3 +8,8 @@ export const setSortBy = (sortBy) => ({
   type: 'SET_SORTBY',
   payload: sortBy
 })
+
+export const setSearch = (value) => ({
+  type: 'SET_SEARCH',
+  payload: value
+})

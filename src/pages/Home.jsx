@@ -1,17 +1,23 @@
 import { Categories, Sort, PizzaBlock, Skeleton } from '.';
 import { setFetchPizzas } from '../redux/actions/pizzas';
+
 import { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {loaded, pizzas} = useSelector(state => state.pizzas)
-  const {category, sortBy} = useSelector(state => state.sort)
+  const { loaded, pizzas } = useSelector((state) => state.pizzas);
+  const { category, sortBy, search } = useSelector((state) => state.sort);
 
   useEffect(() => {
-    dispatch(setFetchPizzas(category, sortBy))
+    dispatch(setFetchPizzas(category, sortBy));
   }, [category, sortBy]);
+
+  const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+  const items = pizzas
+    .filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
+    .map((item) => <PizzaBlock key={item.id} {...item} />);
 
   return (
     <div className="content">
@@ -23,11 +29,7 @@ function Home() {
         </div>
 
         <h2 className="content__title">Все пиццы</h2>
-        <div className="content__items">
-          {!loaded
-            ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
-            : pizzas.map((item) => <PizzaBlock key={item.id} {...item} />)}
-        </div>
+        <div className="content__items">{!loaded ? skeleton : items}</div>
       </div>
     </div>
   );
