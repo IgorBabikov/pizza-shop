@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setSortCategory } from '../redux/actions/sort';
+import { setSortCategory } from '../redux/slices/sortSlice'
 
 const categoriesList = [
   { name: 'Все', type: 0 },
@@ -11,7 +11,7 @@ const categoriesList = [
 ];
 
 function Categories() {
-  const { category } = useSelector((state) => state.sort);
+  const { category } = useSelector((state) => state.sortSlice);
   const dispatch = useDispatch();
 
   const handleCategory = (type) => {

@@ -1,6 +1,6 @@
 import ReactPaginate from 'react-paginate';
 import { useDispatch } from 'react-redux';
-import { setPage } from '../../redux/actions/sort';
+import { setPage } from '../../redux/slices/sortSlice';
 
 import styles from './pagination.module.scss';
 

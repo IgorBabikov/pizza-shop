@@ -3,6 +3,7 @@ const initialState = {
    pizzas: []
 }
 
+
 const pizzas = (state = initialState, action) => {
    switch(action.type) {
       case 'SET_LOADED':

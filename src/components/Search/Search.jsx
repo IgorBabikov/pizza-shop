@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearch } from '../../redux/actions/sort';
+import { setSearch } from '../../redux/slices/sortSlice';
 
 import style from './search.module.scss';
 
 function Search() {
   const dispatch = useDispatch();
-  const { search } = useSelector((state) => state.sort);
+  const { search } = useSelector((state) => state.sortSlice);
 
   return (
     <div className={style.root}>

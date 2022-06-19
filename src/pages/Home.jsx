@@ -1,6 +1,5 @@
 import { Categories, Sort, PizzaBlock, Skeleton } from '.';
 import { setFetchPizzas } from '../redux/actions/pizzas';
-
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../components/Pagination/Pagination';
@@ -9,7 +8,7 @@ function Home() {
   const dispatch = useDispatch();
 
   const { loaded, pizzas } = useSelector((state) => state.pizzas);
-  const { category, sortBy, search, currentPage } = useSelector((state) => state.sort);
+  const { category, sortBy, search, currentPage } = useSelector((state) => state.sortSlice);
 
   useEffect(() => {
     dispatch(setFetchPizzas(category, sortBy, currentPage));
