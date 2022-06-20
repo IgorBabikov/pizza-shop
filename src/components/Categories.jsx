@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortCategory } from '../redux/slices/sortSlice'
 
+
 const categoriesList = [
   { name: 'Все', type: 0 },
   { name: 'Мясные', type: 1 },

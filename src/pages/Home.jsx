@@ -19,11 +19,12 @@ function Home() {
     .filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
     .map((item) => <PizzaBlock key={item.id} {...item} />);
 
+
   return (
     <div className="content">
       <div className="container">
         <div className="content__top">
-          <Categories />
+          <Categories/>
 
           <Sort />
         </div>

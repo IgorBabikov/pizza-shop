@@ -2,13 +2,16 @@ import { createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
    category: 0,
-   sortBy: 'rating',
+   sortBy: {
+      name: 'популярности (DESC)',
+      type: 'rating'
+   },
    search: '',
    currentPage: 1
 }
 
 const sortSlice = createSlice({
-   name: 'filters',
+   name: 'sort',
    initialState,
    reducers: {
       setSortCategory(state, action) {

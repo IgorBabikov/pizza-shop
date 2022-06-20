@@ -12,22 +12,19 @@ const sortName = [
 
 function Sort() {
   const [sortPopup, setSortPopup] = useState(false);
-  const [activeSort, setActiveSort] = useState(0)
+
+  const sortRef = useRef();
 
   const dispatch = useDispatch();
 
   const { sortBy } = useSelector((state) => state.sortSlice);
-  const activeLabel = sortName[activeSort].name
-
-  const sortRef = useRef();
 
   const showSortPopup = () => {
     setSortPopup((prev) => !prev);
   };
 
-  const addActiveSort = (type, index) => {
-    dispatch(setSortBy(type));
-    setActiveSort(index)
+  const addActiveSort = (obj) => {
+    dispatch(setSortBy(obj));
     setSortPopup(false);
   };
 
@@ -56,15 +53,15 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={showSortPopup}>{activeLabel}</span>
+        <span onClick={showSortPopup}>{sortBy.name}</span>
       </div>
       {sortPopup && (
         <div className="sort__popup">
           <ul>
             {sortName.map((item, i) => (
               <li
-                onClick={() => addActiveSort(item.type, i)}
-                className={sortBy === item.type ? 'active' : ''}
+                onClick={() => addActiveSort(item)}
+                className={sortBy.type === item.type ? 'active' : ''}
                 key={item.name}>
                 {item.name}
               </li>
