@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortBy } from '../redux/slices/sortSlice';
 
-const sortName = [
+export const sortName = [
   { name: 'популярности (DESC)', type: 'rating' },
   { name: 'популярности (ASC)', type: '-rating' },
   { name: 'цене (DESC)', type: 'price' },
@@ -18,6 +18,7 @@ function Sort() {
   const dispatch = useDispatch();
 
   const { sortBy } = useSelector((state) => state.sortSlice);
+
 
   const showSortPopup = () => {
     setSortPopup((prev) => !prev);
@@ -58,7 +59,7 @@ function Sort() {
       {sortPopup && (
         <div className="sort__popup">
           <ul>
-            {sortName.map((item, i) => (
+            {sortName.map((item) => (
               <li
                 onClick={() => addActiveSort(item)}
                 className={sortBy.type === item.type ? 'active' : ''}
