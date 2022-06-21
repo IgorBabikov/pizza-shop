@@ -19,7 +19,6 @@ function Sort() {
 
   const { sortBy } = useSelector((state) => state.sortSlice);
 
-
   const showSortPopup = () => {
     setSortPopup((prev) => !prev);
   };
@@ -29,14 +28,16 @@ function Sort() {
     setSortPopup(false);
   };
 
-  const handleClickBody = (e) => {
-    if (!e.path.includes(sortRef.current)) {
-      setSortPopup(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickBody = (e) => {
+      if (!e.path.includes(sortRef.current)) {
+        setSortPopup(false);
+      }
+    };
+
     document.body.addEventListener('click', handleClickBody);
+
+    return () => document.body.removeEventListener('click', handleClickBody);
   }, []);
 
   return (
