@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAddPizzas } from '../redux/slices/cartSlice';
 
 const typePizzaName = ['тонкое', 'традиционное'];
-const typePizzaSizes = [26, 30, 40];
 
 function PizzaBlock({ id, imageUrl, title, price, types, sizes }) {
   const [activeType, setActiveType] = useState(0);
@@ -22,7 +21,7 @@ function PizzaBlock({ id, imageUrl, title, price, types, sizes }) {
       title,
       price,
       type: typePizzaName[activeType],
-      size: typePizzaSizes[activeSize],
+      size: sizes[activeSize],
     };
 
     dispatch(setAddPizzas(items));

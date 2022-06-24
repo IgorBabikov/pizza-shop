@@ -1,11 +1,17 @@
 import PizzaCart from '../components/PizzaCart';
+import CartEmpty from '../components/CartEmpty';
 import { useSelector, useDispatch } from 'react-redux';
 import { setClearPizzas } from '../redux/slices/cartSlice';
 
 function Cart() {
-  const { pizzas, totalPrice } = useSelector((state) => state.cartSlice);
+  const { pizzas } = useSelector((state) => state.cartSlice);
 
   const dispatch = useDispatch();
+
+
+  const totalCount = pizzas.reduce((prev, obj) =>  obj.count + prev, 0)
+
+  const price = pizzas.reduce((prev, obj) => (obj.price * obj.count) + prev, 0)
 
   const onClearCart = () => {
     if (window.confirm('Очистить всю корзину ?')) {
@@ -15,7 +21,7 @@ function Cart() {
   return (
     <div className="content">
       <div className="container container--cart">
-        {pizzas.length > 0 && totalPrice > 0 ? (
+        {price > 0 ? (
           <div className="cart">
             <div className="cart__top">
               <h2 className="content__title">
@@ -99,10 +105,10 @@ function Cart() {
             <div className="cart__bottom">
               <div className="cart__bottom-details">
                 <span>
-                  Всего пицц: <b>{pizzas.length} шт.</b>
+                  Всего пицц: <b>{totalCount} шт.</b>
                 </span>
                 <span>
-                  Сумма заказа: <b>{totalPrice} ₽</b>
+                  Сумма заказа: <b>{price} ₽</b>
                 </span>
               </div>
               <div className="cart__bottom-buttons">
@@ -131,7 +137,7 @@ function Cart() {
             </div>
           </div>
         ) : (
-          <h1>Покупок нет</h1>
+          <CartEmpty />
         )}
       </div>
     </div>

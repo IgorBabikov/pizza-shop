@@ -19,13 +19,17 @@ const cartSlice = createSlice({
 
       setCountMinus(state, action) {
          const findObj = state.pizzas.find(obj => obj.id === action.payload)
+         if ( findObj.count !== 0) {
+            findObj.count--
+         }
+
+
          state.totalPrice = state.pizzas.reduce((prev, obj) => prev - obj.price, state.totalPrice)
-         
-         findObj && findObj.count--
       },
 
       setRemovePizzas(state, action) {
          state.pizzas = state.pizzas.filter(obj => obj.id !== action.payload)
+
       },
 
       setClearPizzas(state) {

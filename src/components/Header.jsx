@@ -3,9 +3,12 @@ import Search from './Search/Search';
 import {useSelector} from 'react-redux'
 
 function Header() {
-  const {totalPrice, pizzas} = useSelector(state => state.cartSlice)
+  const {pizzas} = useSelector(state => state.cartSlice)
 
-  const totalCount = pizzas.reduce((prev, obj) => prev + obj.count, 0)
+  const totalCount = pizzas.reduce((prev, obj) => obj.count + prev, 0)
+
+  const totalPrice = pizzas.reduce((prev, obj) => (obj.price * obj.count) + prev, 0)
+
   return (
     <div className="header">
       <div className="container">
