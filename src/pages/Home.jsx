@@ -1,6 +1,7 @@
 import { Categories, Sort, PizzaBlock, Skeleton } from '.';
-import { setFetchPizzas } from '../redux/actions/pizzas';
+import ErrorMessage from '../components/errorMessage/ErrorMessage'
 import { setFilters } from '../redux/slices/sortSlice';
+import { fetchPizzas } from '../redux/slices/pizzasSlice';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
@@ -13,7 +14,7 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { loaded, pizzas } = useSelector((state) => state.pizzas);
+  const { pizzas, status } = useSelector((state) => state.pizzasSlice);
   const { category, sortBy, search, currentPage } = useSelector((state) => state.sortSlice);
 
   useEffect(() => {
@@ -45,17 +46,32 @@ function Home() {
 
   useEffect(() => {
     if (!isSearch.current) {
-      fetchPizzas();
+      getPizzas();
     }
 
     isSearch.current = false;
   }, [category, sortBy, currentPage]);
 
-  const fetchPizzas = () => {
-    dispatch(setFetchPizzas(category, sortBy, currentPage));
+
+  const getPizzas = () => {
+    const categories = category > 0 ? category : '';
+    const sorting = sortBy.type.replace('-', '');
+    const order = sortBy.type.includes('-') ? 'asc' : 'desc';
+
+    dispatch(
+      fetchPizzas({
+        categories,
+        sorting,
+        order,
+        currentPage
+      }),
+    );
   };
 
+
+
   const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+
   const items = pizzas
     .filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
     .map((item) => <PizzaBlock key={item.id} {...item} />);
@@ -70,7 +86,11 @@ function Home() {
         </div>
 
         <h2 className="content__title">Все пиццы</h2>
-        <div className="content__items">{!loaded ? skeleton : items}</div>
+          {
+            status === 'error' ? <ErrorMessage/> :
+            <div className="content__items">{status === 'loading' ? skeleton : items}</div>
+          }
+
       </div>
 
       <Pagination />
