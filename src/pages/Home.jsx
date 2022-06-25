@@ -1,11 +1,14 @@
-import { Categories, Sort, PizzaBlock, Skeleton } from '.';
-import ErrorMessage from '../components/errorMessage/ErrorMessage'
 import { setFilters } from '../redux/slices/sortSlice';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
+import { selectPizzas } from '../redux/slices/pizzasSlice';
+import { selectSort } from '../redux/slices/sortSlice';
+
+import { Categories, Sort, PizzaBlock, Skeleton } from '.';
+import ErrorMessage from '../components/errorMessage/ErrorMessage';
 import Pagination from '../components/Pagination/Pagination';
 
 function Home() {
@@ -14,8 +17,8 @@ function Home() {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
 
-  const { pizzas, status } = useSelector((state) => state.pizzasSlice);
-  const { category, sortBy, search, currentPage } = useSelector((state) => state.sortSlice);
+  const { pizzas, status } = useSelector(selectPizzas);
+  const { category, sortBy, search, currentPage } = useSelector(selectSort);
 
   useEffect(() => {
     if (window.location.search) {
@@ -52,7 +55,6 @@ function Home() {
     isSearch.current = false;
   }, [category, sortBy, currentPage]);
 
-
   const getPizzas = () => {
     const categories = category > 0 ? category : '';
     const sorting = sortBy.type.replace('-', '');
@@ -63,12 +65,10 @@ function Home() {
         categories,
         sorting,
         order,
-        currentPage
+        currentPage,
       }),
     );
   };
-
-
 
   const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
 
@@ -86,11 +86,11 @@ function Home() {
         </div>
 
         <h2 className="content__title">Все пиццы</h2>
-          {
-            status === 'error' ? <ErrorMessage/> :
-            <div className="content__items">{status === 'loading' ? skeleton : items}</div>
-          }
-
+        {status === 'error' ? (
+          <ErrorMessage />
+        ) : (
+          <div className="content__items">{status === 'loading' ? skeleton : items}</div>
+        )}
       </div>
 
       <Pagination />

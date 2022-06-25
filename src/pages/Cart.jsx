@@ -2,12 +2,12 @@ import PizzaCart from '../components/PizzaCart';
 import CartEmpty from '../components/CartEmpty';
 import { useSelector, useDispatch } from 'react-redux';
 import { setClearPizzas } from '../redux/slices/cartSlice';
+import {selectCart} from '../redux/slices/cartSlice'
 
 function Cart() {
-  const { pizzas } = useSelector((state) => state.cartSlice);
-
   const dispatch = useDispatch();
 
+  const { pizzas } = useSelector(selectCart);
 
   const totalCount = pizzas.reduce((prev, obj) =>  obj.count + prev, 0)
 

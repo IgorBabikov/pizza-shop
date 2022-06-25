@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import Search from './Search/Search';
 import {useSelector} from 'react-redux'
+import {selectCart} from '../redux/slices/cartSlice'
 
 function Header() {
-  const {pizzas} = useSelector(state => state.cartSlice)
+  const {pizzas} = useSelector(selectCart)
 
   const totalCount = pizzas.reduce((prev, obj) => obj.count + prev, 0)
 

@@ -26,7 +26,7 @@ const sortSlice = createSlice({
       setPage(state, action) {
          state.currentPage = action.payload
       },
-      setFilters(state, action) { 
+      setFilters(state, action) {
          state.category = Number(action.payload.category)
          state.currentPage = Number(action.payload.currentPage)
          state.sortBy = action.payload.sortBy
@@ -42,5 +42,7 @@ export const {
    setFilters
 
 } = sortSlice.actions;
+
+export const selectSort = state => state.sortSlice
 
 export default sortSlice.reducer
