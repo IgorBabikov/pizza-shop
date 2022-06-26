@@ -7,11 +7,11 @@ import {selectCart} from '../redux/slices/cartSlice'
 function Cart() {
   const dispatch = useDispatch();
 
-  const { pizzas } = useSelector(selectCart);
+  const { pizzasCart } = useSelector(selectCart);
 
-  const totalCount = pizzas.reduce((prev, obj) =>  obj.count + prev, 0)
+  const totalCount = pizzasCart.reduce((prev, obj) =>  obj.count + prev, 0)
 
-  const price = pizzas.reduce((prev, obj) => (obj.price * obj.count) + prev, 0)
+  const price = pizzasCart.reduce((prev, obj) => (obj.price * obj.count) + prev, 0)
 
   const onClearCart = () => {
     if (window.confirm('Очистить всю корзину ?')) {
@@ -97,7 +97,7 @@ function Cart() {
             </div>
 
             <div className="content__items">
-              {pizzas.map((item) => (
+              {pizzasCart.map((item) => (
                 <PizzaCart key={item.id} {...item} />
               ))}
             </div>

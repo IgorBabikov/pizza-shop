@@ -1,21 +1,25 @@
 import { Link, useLocation } from 'react-router-dom';
-import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../redux/slices/cartSlice';
+import { selectPizzas } from '../redux/slices/pizzasSlice';
+import { useEffect } from 'react';
+
+import Search from './Search/Search';
 
 function Header() {
-  const { pizzas } = useSelector(selectCart);
+  const { pizzasCart } = useSelector(selectCart);
+
   const { pathname } = useLocation();
 
-  const totalCount = pizzas.reduce((prev, obj) => obj.count + prev, 0);
+  const totalCount = pizzasCart.reduce((prev, obj) => obj.count + prev, 0);
 
-  const totalPrice = pizzas.reduce((prev, obj) => obj.price * obj.count + prev, 0);
+  const totalPrice = pizzasCart.reduce((prev, obj) => obj.price * obj.count + prev, 0);
 
   return (
     <div className="header">
       <div className="container">
         <Link to="/" className="header__logo">
-          <img width="38" src="./img/pizza-logo.svg" alt="Pizza logo" />
+          <img width="38" src="img/pizza-logo.svg" alt="Pizza logo" />
           <div>
             <h1>React Pizza</h1>
             <p>самая вкусная пицца во вселенной</p>
