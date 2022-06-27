@@ -52,7 +52,9 @@
     ]
   },
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/lodash.debounce": "^4.0.7"
+  },
   "author": "",
   "license": "ISC",
   "description": "mern app"

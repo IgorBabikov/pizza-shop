@@ -1,17 +1,19 @@
-import PizzaCart from '../components/PizzaCart';
-import CartEmpty from '../components/CartEmpty';
 import { useSelector, useDispatch } from 'react-redux';
 import { setClearPizzas } from '../redux/slices/cartSlice';
 import {selectCart} from '../redux/slices/cartSlice'
+import {FC} from 'react'
 
-function Cart() {
+import PizzaCart from '../components/PizzaCart';
+import CartEmpty from '../components/CartEmpty';
+
+const Cart: FC = () => {
   const dispatch = useDispatch();
 
   const { pizzasCart } = useSelector(selectCart);
 
-  const totalCount = pizzasCart.reduce((prev, obj) =>  obj.count + prev, 0)
+  const totalCount = pizzasCart.reduce((prev: any, obj: any) =>  obj.count + prev, 0)
 
-  const price = pizzasCart.reduce((prev, obj) => (obj.price * obj.count) + prev, 0)
+  const price = pizzasCart.reduce((prev: any, obj: any) => (obj.price * obj.count) + prev, 0)
 
   const onClearCart = () => {
     if (window.confirm('Очистить всю корзину ?')) {
@@ -97,7 +99,7 @@ function Cart() {
             </div>
 
             <div className="content__items">
-              {pizzasCart.map((item) => (
+              {pizzasCart.map((item: any) => (
                 <PizzaCart key={item.id} {...item} />
               ))}
             </div>

@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import axios from 'axios';
 
 import Spinner from '../spinner/Spinner';
 
 import style from './pizzaInfo.module.scss';
 
-function PizzaInfo() {
-  const [pizza, setPizza] = useState();
+const PizzaInfo : FC = () => {
+  const [pizza, setPizza] = useState<{
+    imageUrl: string,
+    title: string
+  }>();
 
   const key = process.env.REACT_APP_KEY;
   const { id } = useParams();

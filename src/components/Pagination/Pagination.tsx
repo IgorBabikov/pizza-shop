@@ -1,12 +1,15 @@
-import ReactPaginate from 'react-paginate';
+import {FC} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setPage } from '../../redux/slices/sortSlice';
+import { setPage, selectSort } from '../../redux/slices/sortSlice';
+
+import ReactPaginate from 'react-paginate';
 
 import styles from './pagination.module.scss';
 
-function Pagination() {
+
+const Pagination: FC = () => {
   const dispatch = useDispatch();
-  const { currentPage } = useSelector((state) => state.sortSlice);
+  const { currentPage } = useSelector(selectSort);
 
   return (
     <ReactPaginate

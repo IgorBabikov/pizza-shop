@@ -1,6 +1,8 @@
+import {FC} from 'react'
+
 import './spinner.scss';
 
-function Spinner() {
+const Spinner: FC = () => {
   return (
     <div className="lds-roller">
       <div></div>

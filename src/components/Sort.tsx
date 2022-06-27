@@ -1,9 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FC, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortBy } from '../redux/slices/sortSlice';
 import { selectSort } from '../redux/slices/sortSlice';
 
-export const sortName = [
+type SortItem = {
+  name: string;
+  type: string;
+};
+
+
+
+export const sortName: SortItem[] = [
   { name: 'популярности (DESC)', type: 'rating' },
   { name: 'популярности (ASC)', type: '-rating' },
   { name: 'цене (DESC)', type: 'price' },
@@ -11,10 +18,10 @@ export const sortName = [
   { name: 'алфавиту', type: 'title' },
 ];
 
-function Sort() {
+const Sort: FC = () => {
   const [sortPopup, setSortPopup] = useState(false);
 
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
@@ -24,14 +31,17 @@ function Sort() {
     setSortPopup((prev) => !prev);
   };
 
-  const addActiveSort = (obj) => {
+  const addActiveSort = (obj: SortItem) => {
     dispatch(setSortBy(obj));
     setSortPopup(false);
   };
 
   useEffect(() => {
-    const handleClickBody = (e) => {
-      if (!e.path.includes(sortRef.current)) {
+    const handleClickBody = (e: any) => {
+
+      const path = e.path || (e.composedPath && e.composedPath());
+
+      if (sortRef.current && (path && !path.includes(sortRef.current))) {
         setSortPopup(false);
       }
     };
@@ -40,6 +50,7 @@ function Sort() {
 
     return () => document.body.removeEventListener('click', handleClickBody);
   }, []);
+
 
   return (
     <div ref={sortRef} className="sort">
@@ -74,6 +85,6 @@ function Sort() {
       )}
     </div>
   );
-}
+};
 
 export default Sort;
