@@ -1,19 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../redux/slices/cartSlice';
-import { selectPizzas } from '../redux/slices/pizzasSlice';
-import { useEffect } from 'react';
+import { FC } from 'react';
 
 import Search from './Search/Search';
 
-function Header() {
+const Header: FC = () => {
   const { pizzasCart } = useSelector(selectCart);
 
   const { pathname } = useLocation();
 
-  const totalCount = pizzasCart.reduce((prev, obj) => obj.count + prev, 0);
+  const totalCount = pizzasCart.reduce((prev: number, obj: any) => obj.count + prev, 0);
 
-  const totalPrice = pizzasCart.reduce((prev, obj) => obj.price * obj.count + prev, 0);
+  const totalPrice = pizzasCart.reduce((prev: number, obj: any) => obj.price * obj.count + prev, 0);
 
   return (
     <div className="header">
@@ -26,7 +25,7 @@ function Header() {
           </div>
         </Link>
 
-        <Search />
+        {pathname !== '/cart' ? <Search /> : ''}
 
         <div className="header__cart">
           {pathname !== '/cart' ? (
@@ -68,6 +67,6 @@ function Header() {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

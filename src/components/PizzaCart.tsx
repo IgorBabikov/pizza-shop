@@ -1,11 +1,22 @@
-import { setAddPizzas, setCountMinus, setRemovePizzas } from '../redux/slices/cartSlice';
+import { CartItem, setAddPizzas, setCountMinus, setRemovePizzas } from '../redux/slices/cartSlice';
 import { useDispatch } from 'react-redux';
+import {FC} from 'react'
 
-function PizzaCart({ id, imageUrl, title, price, type, size, count }) {
+type PizzaCartProps = {
+  id: string;
+  imageUrl: string;
+  title: string;
+  price: number;
+  type: string;
+  size: number;
+  count: number;
+};
+
+const PizzaCart: FC<PizzaCartProps> = ({ id, imageUrl, title, price, type, size, count }) => {
   const dispatch = useDispatch();
 
   const onCountPlus = () => {
-    dispatch(setAddPizzas({ id }));
+    dispatch(setAddPizzas({id} as CartItem));
   };
 
   const onCountMinus = () => {
