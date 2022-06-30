@@ -6,8 +6,11 @@
 
   .container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    @media (max-width: $bp-sm) {
+      flex-direction: column-reverse;
+      align-items: flex-end;
+    }
   }
 
   &__logo {
@@ -23,10 +26,28 @@
       letter-spacing: 1%;
       text-transform: uppercase;
       font-weight: 800;
+      @media (max-width: $bp-lg) {
+        font-size: 18px;
+      }
     }
 
     p {
       color: #7b7b7b;
+      @media (max-width: $bp-lg) {
+        font-size: 14px;
+      }
     }
+
+    @media (max-width: $bp-lg) {
+      flex-direction: column;
+    }
+
+    @media (max-width: $bp-md) {
+      display: none;
+    }
+  }
+
+  @media (max-width: $bp-xl) {
+    padding: 0;
   }
 }

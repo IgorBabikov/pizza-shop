@@ -2,14 +2,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setClearPizzas } from '../redux/slices/cartSlice';
 import {selectCart} from '../redux/slices/cartSlice'
 import {FC} from 'react'
+import {Link} from 'react-router-dom'
+import { selectFormData, setDataForm } from '../redux/slices/formSlice';
 
 import PizzaCart from '../components/PizzaCart';
 import CartEmpty from '../components/CartEmpty';
+import FormCart from '../components/form/FormCart';
+import ShowFormMessage from '../components/showFormMessage/ShowFormMessage';
 
 const Cart: FC = () => {
   const dispatch = useDispatch();
-
   const { pizzasCart } = useSelector(selectCart);
+  const {showForm, messageForm} = useSelector(selectFormData)
 
   const totalCount = pizzasCart.reduce((prev: any, obj: any) =>  obj.count + prev, 0)
 
@@ -20,6 +24,10 @@ const Cart: FC = () => {
       dispatch(setClearPizzas());
     }
   };
+
+  const showFormCart = () => {
+    dispatch(setDataForm(true))
+  }
   return (
     <div className="content">
       <div className="container container--cart">
@@ -98,7 +106,7 @@ const Cart: FC = () => {
               </div>
             </div>
 
-            <div className="content__items">
+            <div className="content__items-cart">
               {pizzasCart.map((item: any) => (
                 <PizzaCart key={item.id} {...item} />
               ))}
@@ -114,7 +122,7 @@ const Cart: FC = () => {
                 </span>
               </div>
               <div className="cart__bottom-buttons">
-                <a href="/" className="button button--outline button--add go-back-btn">
+                <Link to="/" className="button button--outline button--add go-back-btn">
                   <svg
                     width="8"
                     height="14"
@@ -131,8 +139,8 @@ const Cart: FC = () => {
                   </svg>
 
                   <span>Вернуться назад</span>
-                </a>
-                <div className="button pay-btn">
+                </Link>
+                <div onClick={showFormCart} className="button pay-btn">
                   <span>Оплатить сейчас</span>
                 </div>
               </div>
@@ -142,6 +150,14 @@ const Cart: FC = () => {
           <CartEmpty />
         )}
       </div>
+
+      {
+        showForm ? <FormCart/> : null
+      }
+
+      {
+        messageForm ? <ShowFormMessage text={'Спасибо! ваша заявка отправлена'}/> : null
+      }
     </div>
   );
 }

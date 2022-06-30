@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FC, MouseEvent } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSortBy } from '../redux/slices/sortSlice';
 import { selectSort } from '../redux/slices/sortSlice';
@@ -7,8 +7,6 @@ type SortItem = {
   name: string;
   type: string;
 };
-
-
 
 export const sortName: SortItem[] = [
   { name: 'популярности (DESC)', type: 'rating' },
@@ -38,10 +36,9 @@ const Sort: FC = () => {
 
   useEffect(() => {
     const handleClickBody = (e: any) => {
-
       const path = e.path || (e.composedPath && e.composedPath());
 
-      if (sortRef.current && (path && !path.includes(sortRef.current))) {
+      if (sortRef.current && path && !path.includes(sortRef.current)) {
         setSortPopup(false);
       }
     };
@@ -51,11 +48,11 @@ const Sort: FC = () => {
     return () => document.body.removeEventListener('click', handleClickBody);
   }, []);
 
-
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
+          style={{ transform: sortPopup ? 'rotate(180deg)' : '' }}
           width="10"
           height="6"
           viewBox="0 0 10 6"

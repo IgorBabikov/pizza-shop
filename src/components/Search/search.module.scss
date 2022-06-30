@@ -1,6 +1,16 @@
+@import '../../../src/styles/variables';
+
 .root {
   position: relative;
   left: -100px;
+
+  @media (max-width: $bp-xl) {
+    left: 0;
+  }
+  @media (max-width: $bp-sm) {
+    width: 100%;
+    margin-top: 20px;
+  }
 }
 
 .input {
@@ -16,6 +26,23 @@
 
   &:focus {
     border: 1px solid #000;
+  }
+
+  @media (max-width: $bp-xl) {
+    width: 370px;
+  }
+
+  @media (max-width: $bp-lg) {
+    width: 300px;
+  }
+
+  @media (max-width: $bp-md) {
+    width: 350px;
+  }
+
+  @media (max-width: $bp-sm) {
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 

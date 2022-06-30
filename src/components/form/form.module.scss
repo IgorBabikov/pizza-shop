@@ -1,0 +1,87 @@
+@import '../../../src/styles/variables.scss';
+
+.form {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 10;
+}
+
+.popup {
+  position: relative;
+  border-radius: 20px;
+  width: 600px;
+  padding: 50px;
+  background: #dae5e7;
+  @media (max-width: $bp-md) {
+    width: 560px;
+    padding: 50px 20px 20px;
+  }
+  @media (max-width: $bp-sm) {
+    width: 295px;
+
+  }
+}
+
+input {
+  width: 100%;
+  padding: 20px 10px;
+  margin-bottom: 10px;
+  border: none;
+  font-family: inherit;
+  &::placeholder {
+    font-size: 18px;
+    font-family: inherit;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: 15px 10px;
+  }
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: -2px;
+  top: 4px;
+
+  z-index: 1;
+  cursor: pointer;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: #94cfa2;
+  padding: 15px 20px;
+  color: #000;
+  margin-top: 20px;
+  transition: all 0.2s linear;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #44a55b;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: 12px 15px;
+  }
+}
+
+.error {
+  font-size: 10px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.showMessageDone {
+  color: green;
+}

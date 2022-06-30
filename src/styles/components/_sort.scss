@@ -12,12 +12,27 @@
 
     b {
       margin-right: 8px;
+      @media (max-width: $bp-sm) {
+        margin-right: 3px;
+      }
     }
 
     span {
       color: $orange;
       border-bottom: 1px dashed $orange;
       cursor: pointer;
+    }
+
+    @media (max-width: $bp-xl) {
+      display: inline-block;
+    }
+
+    @media (max-width: $bp-lg) {
+      margin-top: 30px;
+    }
+
+    @media (max-width: $bp-sm) {
+      display: flex;
     }
   }
 
@@ -49,5 +64,9 @@
         }
       }
     }
+  }
+
+  @media (max-width: $bp-sm) {
+    margin-top: 15px;
   }
 }
