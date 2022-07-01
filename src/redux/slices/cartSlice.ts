@@ -36,9 +36,11 @@ const cartSlice = createSlice({
       setCountMinus(state, action: PayloadAction<string>) {
          const findObj = state.pizzasCart.find(obj => obj.id === action.payload)
 
-         findObj && findObj.count !== 0 ? findObj.count--: null
-
          state.totalPrice = state.pizzasCart.reduce((prev, obj) => prev - obj.price, state.totalPrice)
+
+         if (findObj && findObj.count !== 0) {
+           findObj.count--
+         }
       },
 
       setRemovePizzas(state, action: PayloadAction<string>) {

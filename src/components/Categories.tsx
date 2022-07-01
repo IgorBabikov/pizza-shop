@@ -19,7 +19,7 @@ const Categories: FC = () => {
         {categoriesList.map((item, i) => (
           <li
             onClick={() => handleCategory(i)}
-            className={categoryId == i ? 'active' : ''}
+            className={categoryId === i ? 'active' : ''}
             key={item}>
             {item}
           </li>
