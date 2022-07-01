@@ -19,7 +19,7 @@ const PizzaInfo: FC = () => {
   useEffect(() => {
     async function fetchPizzaId() {
       try {
-        const { data } = await axios.get(`https://${key}.mockapi.io/pizzas-list/${id}`);
+        const { data } = await axios.get(`https://62a54ce7430ba53411c504a9.mockapi.io/pizzas-list/${id}`);
         setPizza(data);
       } catch (error) {
         alert('Не удалось получить информаю о пиццы');
