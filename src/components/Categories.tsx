@@ -1,12 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { FC } from 'react';
-import { setSortCategory, selectSort } from '../redux/slices/sortSlice';
+import { useDispatch } from 'react-redux';
+import { FC, memo } from 'react';
 
+import { setSortCategory } from '../redux/slices/sortSlice';
 
 const categoriesList = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-const Categories: FC = () => {
-  const { categoryId } = useSelector(selectSort);
+type CategoriesId = {
+  categoryId: number
+}
+
+const Categories: FC<CategoriesId> = memo(({categoryId}) => {
   const dispatch = useDispatch();
 
   const handleCategory = (index: number) => {
@@ -19,7 +22,7 @@ const Categories: FC = () => {
         {categoriesList.map((item, i) => (
           <li
             onClick={() => handleCategory(i)}
-            className={categoryId === i ? 'active' : ''}
+            className={categoryId == i ? 'active' : ''}
             key={item}>
             {item}
           </li>
@@ -27,6 +30,6 @@ const Categories: FC = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default Categories;

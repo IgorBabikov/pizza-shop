@@ -1,14 +1,10 @@
-import { useState, useEffect, useRef, FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect, useRef, FC, memo } from 'react';
+import { useDispatch } from 'react-redux';
 import { setSortBy } from '../redux/slices/sortSlice';
-import { selectSort } from '../redux/slices/sortSlice';
+import {Sort as SortType} from '../redux/slices/sortSlice'
 
-type SortItem = {
-  name: string;
-  type: string;
-};
 
-export const sortName: SortItem[] = [
+export const sortName: SortType[] = [
   { name: 'популярности (DESC)', type: 'rating' },
   { name: 'популярности (ASC)', type: '-rating' },
   { name: 'цене (DESC)', type: 'price' },
@@ -16,20 +12,22 @@ export const sortName: SortItem[] = [
   { name: 'алфавиту', type: 'title' },
 ];
 
-const Sort: FC = () => {
+type SortPopupProps = {
+  sortBy: SortType;
+};
+
+const Sort: FC<SortPopupProps> = memo(({sortBy}) => {
   const [sortPopup, setSortPopup] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
-  const { sortBy } = useSelector(selectSort);
-
   const showSortPopup = () => {
     setSortPopup((prev) => !prev);
   };
 
-  const addActiveSort = (obj: SortItem) => {
+  const addActiveSort = (obj: SortType) => {
     dispatch(setSortBy(obj));
     setSortPopup(false);
   };
@@ -82,6 +80,6 @@ const Sort: FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;
