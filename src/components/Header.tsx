@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../redux/slices/cartSlice';
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import Search from './Search/Search';
 
@@ -13,6 +13,17 @@ const Header: FC = () => {
   const totalCount = pizzasCart.reduce((prev: number, obj: any) => obj.count + prev, 0);
 
   const totalPrice = pizzasCart.reduce((prev: number, obj: any) => obj.price * obj.count + prev, 0);
+
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(pizzasCart);
+
+      localStorage.setItem('pizzasCart', json);
+    }
+    isMounted.current = true;
+  }, [pizzasCart]);
 
   return (
     <div className="header">

@@ -1,4 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { calcTotalPricePlus, calcTotalPriceMinus } from '../../utils/calcTotalPrice';
+import { getCartLC } from '../../utils/getCartLC';
 import { RootState } from '../store';
 
 export type CartItem = {
@@ -11,15 +13,13 @@ export type CartItem = {
    count: number;
 }
 
-interface CartSliceState {
+export interface CartSliceState {
    totalPrice: number;
    pizzasCart: CartItem[];
 }
 
-const initialState: CartSliceState = {
-   totalPrice: 0,
-   pizzasCart: []
-}
+const initialState: CartSliceState = getCartLC()
+
 
 const cartSlice = createSlice({
    name: 'cart',
@@ -30,13 +30,14 @@ const cartSlice = createSlice({
          const findObj = state.pizzasCart.find(obj => obj.id === action.payload.id)
 
          findObj ? findObj.count++ : state.pizzasCart.push({...action.payload, count: 1})
-         state.totalPrice = state.pizzasCart.reduce((prev, obj) => prev + (obj.price * obj.count), 0)
+
+         state.totalPrice = calcTotalPricePlus(state.pizzasCart)
       },
 
       setCountMinus(state, action: PayloadAction<string>) {
          const findObj = state.pizzasCart.find(obj => obj.id === action.payload)
 
-         state.totalPrice = state.pizzasCart.reduce((prev, obj) => prev - obj.price, state.totalPrice)
+         state.totalPrice = calcTotalPriceMinus(state.pizzasCart, state.totalPrice)
 
          if (findObj && findObj.count !== 0) {
            findObj.count--

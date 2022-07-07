@@ -23,6 +23,7 @@ const Home: FC = () => {
   const { pizzas, status } = useSelector(selectPizzas);
   const { categoryId, sortBy, search, currentPage } = useSelector(selectSort);
 
+
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
