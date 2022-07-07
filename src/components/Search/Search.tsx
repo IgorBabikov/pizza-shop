@@ -1,35 +1,35 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useRef, useCallback, useState, FC, ChangeEvent } from 'react';
-import { setSearch, selectSort } from '../../redux/slices/sortSlice';
+import { setSearch } from '../../redux/sort/slice';
+import { selectSort } from '../../redux/sort/selectors';
 import debounce from 'lodash.debounce';
 
 import style from './search.module.scss';
 
-
 const Search: FC = () => {
-  const [value, setValue] = useState<string>('')
+  const [value, setValue] = useState<string>('');
   const { search } = useSelector(selectSort);
 
   const dispatch = useDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const clearInput = () => {
-    setValue('')
+    setValue('');
     dispatch(setSearch(''));
-    inputRef.current ?.focus();
+    inputRef.current?.focus();
   };
 
   const updateSearch = useCallback(
     debounce((e) => {
-      dispatch(setSearch(e.target.value))
+      dispatch(setSearch(e.target.value));
     }, 500),
-    []
-  )
+    [],
+  );
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-    updateSearch(e)
-  }
+    setValue(e.target.value);
+    updateSearch(e);
+  };
 
   return (
     <div className={style.root}>
@@ -62,6 +62,6 @@ const Search: FC = () => {
       ) : null}
     </div>
   );
-}
+};
 
 export default Search;

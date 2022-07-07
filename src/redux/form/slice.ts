@@ -1,11 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { RootState } from '../store';
+import { FormSliceState } from '../form/types';
 
-
-interface FormSliceState {
- showForm: boolean;
- messageForm: boolean;
-}
 
 const initialState: FormSliceState = {
  showForm: false,
@@ -26,8 +21,6 @@ const formSlice = createSlice({
    }
 })
 
-
-export const selectFormData = (state: RootState) => state.formSlice
 
 
 export const {setDataForm, setMessageForm} = formSlice.actions

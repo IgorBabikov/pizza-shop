@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCart } from '../redux/slices/cartSlice';
+import { selectCart } from '../redux/cart/selectors';
 import { FC, useEffect, useRef } from 'react';
 
 import Search from './Search/Search';

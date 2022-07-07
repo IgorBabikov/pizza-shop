@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { FC } from 'react';
 
-import { setDataForm, setMessageForm } from '../../redux/slices/formSlice';
+import { setDataForm, setMessageForm } from '../../redux/form/slice'
 
 import styles from './form.module.scss';
 

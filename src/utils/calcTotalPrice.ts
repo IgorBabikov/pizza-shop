@@ -1,4 +1,4 @@
-import { CartItem } from "../redux/slices/cartSlice";
+import { CartItem } from "../redux/cart/types";
 
 export const calcTotalPricePlus = (pizzasCart: CartItem[]) => {
  return pizzasCart.reduce((prev, obj) => prev + (obj.price * obj.count), 0)

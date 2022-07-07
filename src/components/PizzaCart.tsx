@@ -1,4 +1,5 @@
-import { CartItem, setAddPizzas, setCountMinus, setRemovePizzas } from '../redux/slices/cartSlice';
+import {setAddPizzas, setCountMinus, setRemovePizzas } from '../redux/cart/slice';
+import {CartItem} from '../redux/cart/types'
 import { useDispatch } from 'react-redux';
 import {FC} from 'react'
 

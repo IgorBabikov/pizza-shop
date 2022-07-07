@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { FC, memo } from 'react';
 
-import { setSortCategory } from '../redux/slices/sortSlice';
+import { setSortCategory } from '../redux/sort/slice';
 
 const categoriesList = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 

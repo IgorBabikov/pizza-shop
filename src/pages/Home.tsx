@@ -1,13 +1,14 @@
-import { setFilters } from '../redux/slices/sortSlice';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
 import { useEffect, useRef, FC } from 'react';
+import { useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { selectPizzas } from '../redux/slices/pizzasSlice';
-import { selectSort } from '../redux/slices/sortSlice';
-import { useAppDispatch } from '../redux/store';
-import { FilterSliceState } from '../redux/slices/sortSlice';
+
+import { setFilters } from '../redux/sort/slice';
+import { fetchPizzas } from '../redux/pizzas/slice';
+import { FilterSliceState } from '../redux/sort/types';
+import { selectPizzas } from '../redux/pizzas/selectors';
+import { selectSort } from '../redux/sort/selectors';
 
 
 import { Categories, Sort, PizzaBlock, Skeleton } from '.';

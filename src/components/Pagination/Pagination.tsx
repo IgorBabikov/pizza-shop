@@ -1,11 +1,11 @@
-import {FC} from 'react'
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPage, selectSort } from '../../redux/slices/sortSlice';
+import { setPage } from '../../redux/sort/slice';
+import { selectSort } from '../../redux/sort/selectors';
 
 import ReactPaginate from 'react-paginate';
 
 import styles from './pagination.module.scss';
-
 
 const Pagination: FC = () => {
   const dispatch = useDispatch();
@@ -23,6 +23,6 @@ const Pagination: FC = () => {
       forcePage={currentPage - 1}
     />
   );
-}
+};
 
 export default Pagination;

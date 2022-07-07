@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, FC, memo } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSortBy } from '../redux/slices/sortSlice';
-import {Sort as SortType} from '../redux/slices/sortSlice'
-
+import { setSortBy } from '../redux/sort/slice';
+import { Sort as SortType } from '../redux/sort/types';
 
 export const sortName: SortType[] = [
   { name: 'популярности (DESC)', type: 'rating' },
@@ -16,7 +15,7 @@ type SortPopupProps = {
   sortBy: SortType;
 };
 
-const Sort: FC<SortPopupProps> = memo(({sortBy}) => {
+const Sort: FC<SortPopupProps> = memo(({ sortBy }) => {
   const [sortPopup, setSortPopup] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);

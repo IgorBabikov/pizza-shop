@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setClearPizzas } from '../redux/slices/cartSlice';
-import {selectCart} from '../redux/slices/cartSlice'
-import {FC} from 'react'
-import {Link} from 'react-router-dom'
-import { selectFormData, setDataForm } from '../redux/slices/formSlice';
+import { setClearPizzas } from '../redux/cart/slice';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { selectCart } from '../redux/cart/selectors';
+
+import { setDataForm } from '../redux/form/slice';
+import { selectFormData } from '../redux/form/selectors';
 
 import PizzaCart from '../components/PizzaCart';
 import CartEmpty from '../components/CartEmpty';
@@ -13,11 +15,11 @@ import ShowFormMessage from '../components/showFormMessage/ShowFormMessage';
 const Cart: FC = () => {
   const dispatch = useDispatch();
   const { pizzasCart } = useSelector(selectCart);
-  const {showForm, messageForm} = useSelector(selectFormData)
+  const { showForm, messageForm } = useSelector(selectFormData);
 
-  const totalCount = pizzasCart.reduce((prev: any, obj: any) =>  obj.count + prev, 0)
+  const totalCount = pizzasCart.reduce((prev: any, obj: any) => obj.count + prev, 0);
 
-  const price = pizzasCart.reduce((prev: any, obj: any) => (obj.price * obj.count) + prev, 0)
+  const price = pizzasCart.reduce((prev: any, obj: any) => obj.price * obj.count + prev, 0);
 
   const onClearCart = () => {
     if (window.confirm('Очистить всю корзину ?')) {
@@ -26,8 +28,8 @@ const Cart: FC = () => {
   };
 
   const showFormCart = () => {
-    dispatch(setDataForm(true))
-  }
+    dispatch(setDataForm(true));
+  };
   return (
     <div className="content">
       <div className="container container--cart">
@@ -151,15 +153,11 @@ const Cart: FC = () => {
         )}
       </div>
 
-      {
-        showForm ? <FormCart/> : null
-      }
+      {showForm ? <FormCart /> : null}
 
-      {
-        messageForm ? <ShowFormMessage text={'Спасибо! ваша заявка отправлена'}/> : null
-      }
+      {messageForm ? <ShowFormMessage text={'Спасибо! ваша заявка отправлена'} /> : null}
     </div>
   );
-}
+};
 
 export default Cart;
