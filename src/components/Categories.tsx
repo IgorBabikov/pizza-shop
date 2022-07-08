@@ -9,7 +9,7 @@ type CategoriesId = {
   categoryId: number
 }
 
-const Categories: FC<CategoriesId> = memo(({categoryId}) => {
+export const Categories: FC<CategoriesId> = memo(({categoryId}) => {
   const dispatch = useDispatch();
 
   const handleCategory = (index: number) => {
@@ -31,5 +31,3 @@ const Categories: FC<CategoriesId> = memo(({categoryId}) => {
     </div>
   );
 });
-
-export default Categories;

@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { selectCart } from '../redux/cart/selectors';
 import { FC, useEffect, useRef } from 'react';
 
-import Search from './Search/Search';
+import {Search} from './Search/Search';
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const { pizzasCart } = useSelector(selectCart);
 
   const { pathname } = useLocation();
@@ -79,4 +79,3 @@ const Header: FC = () => {
   );
 };
 
-export default Header;

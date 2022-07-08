@@ -13,7 +13,7 @@ type PizzaCartProps = {
   count: number;
 };
 
-const PizzaCart: FC<PizzaCartProps> = ({ id, imageUrl, title, price, type, size, count }) => {
+export const PizzaCart: FC<PizzaCartProps> = ({ id, imageUrl, title, price, type, size, count }) => {
   const dispatch = useDispatch();
 
   const onCountPlus = () => {
@@ -109,4 +109,3 @@ const PizzaCart: FC<PizzaCartProps> = ({ id, imageUrl, title, price, type, size,
   );
 }
 
-export default PizzaCart;

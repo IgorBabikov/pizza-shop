@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 
 import style from './search.module.scss';
 
-const Search: FC = () => {
+export const Search: FC = () => {
   const [value, setValue] = useState<string>('');
   const { search } = useSelector(selectSort);
 
@@ -63,5 +63,3 @@ const Search: FC = () => {
     </div>
   );
 };
-
-export default Search;

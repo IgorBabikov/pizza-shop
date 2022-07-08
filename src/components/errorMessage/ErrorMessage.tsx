@@ -3,7 +3,7 @@ import {FC} from 'react'
 import img from './error.gif'
 import style from './errorMessage.module.scss'
 
-const ErrorMessage: FC = () => {
+export const ErrorMessage: FC = () => {
    return (
       <>
         <h2 className={style.title}>Произошла ошибка! не удалось получить данные</h2>
@@ -13,5 +13,3 @@ const ErrorMessage: FC = () => {
 
    )
 }
-
-export default ErrorMessage

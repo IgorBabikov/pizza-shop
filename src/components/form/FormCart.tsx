@@ -32,7 +32,7 @@ const MyTextInput: FC<Input> = ({ ...props }) => {
   );
 };
 
-const FormCart: FC = () => {
+export const FormCart: FC = () => {
   const dispatch = useDispatch();
 
   const addDataForm = async (obj: Data) => {
@@ -92,4 +92,3 @@ const FormCart: FC = () => {
   );
 };
 
-export default FormCart;

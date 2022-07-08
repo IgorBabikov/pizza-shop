@@ -15,7 +15,7 @@ type SortPopupProps = {
   sortBy: SortType;
 };
 
-const Sort: FC<SortPopupProps> = memo(({ sortBy }) => {
+export const Sort: FC<SortPopupProps> = memo(({ sortBy }) => {
   const [sortPopup, setSortPopup] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
@@ -80,5 +80,3 @@ const Sort: FC<SortPopupProps> = memo(({ sortBy }) => {
     </div>
   );
 });
-
-export default Sort;

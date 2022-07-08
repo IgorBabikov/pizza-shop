@@ -7,10 +7,7 @@ import { selectCart } from '../redux/cart/selectors';
 import { setDataForm } from '../redux/form/slice';
 import { selectFormData } from '../redux/form/selectors';
 
-import PizzaCart from '../components/PizzaCart';
-import CartEmpty from '../components/CartEmpty';
-import FormCart from '../components/form/FormCart';
-import ShowFormMessage from '../components/showFormMessage/ShowFormMessage';
+import {PizzaCart, CartEmpty, FormCart, ShowFormMessage} from '../components'
 
 const Cart: FC = () => {
   const dispatch = useDispatch();

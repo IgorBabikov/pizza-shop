@@ -3,7 +3,7 @@ import { useEffect, useState, FC } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Spinner from '../spinner/Spinner';
+import {Spinner} from '../spinner/Spinner';
 
 import style from './pizzaInfo.module.scss';
 
@@ -75,4 +75,4 @@ const PizzaInfo: FC = () => {
   );
 };
 
-export default PizzaInfo;
+export default PizzaInfo

@@ -2,7 +2,7 @@ import {FC} from 'react'
 
 import './spinner.scss';
 
-const Spinner: FC = () => {
+export const Spinner: FC = () => {
   return (
     <div className="lds-roller">
       <div></div>
@@ -12,5 +12,3 @@ const Spinner: FC = () => {
     </div>
   );
 }
-
-export default Spinner;

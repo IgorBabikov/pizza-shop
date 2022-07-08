@@ -17,5 +17,3 @@ export const CartEmpty: FC = () => (
     </Link>
   </div>
 );
-
-export default CartEmpty

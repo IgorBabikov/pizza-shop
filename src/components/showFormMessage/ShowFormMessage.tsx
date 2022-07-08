@@ -5,7 +5,7 @@ import styles from './showFormMessage.module.scss';
 type MessageForm = {
    text: string
 }
-const ShowFormMessage: FC<MessageForm> = ({text}) => {
+export const ShowFormMessage: FC<MessageForm> = ({text}) => {
   return (
     <div className={styles.message}>
       <div>
@@ -14,5 +14,3 @@ const ShowFormMessage: FC<MessageForm> = ({text}) => {
     </div>
   );
 }
-
-export default ShowFormMessage;

@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 
 import styles from './pagination.module.scss';
 
-const Pagination: FC = () => {
+export const Pagination: FC = () => {
   const dispatch = useDispatch();
   const { currentPage } = useSelector(selectSort);
 
@@ -24,5 +24,3 @@ const Pagination: FC = () => {
     />
   );
 };
-
-export default Pagination;

@@ -2,7 +2,8 @@ import {Routes, Route } from "react-router-dom";
 import {lazy, Suspense} from 'react'
 import Home from "./pages/Home";
 import MaingLayout from "./layout/MaingLayout";
-import Spinner from "./components/spinner/Spinner";
+
+import {Spinner} from "./components/spinner/Spinner";
 
 const PizzaInfo = lazy(() => import(/* webpackChunkName: "PizzaInfo" */ '../src/components/pizzaInfo/PizzaInfo'))
 const Cart = lazy(() => import(/* webpackChunkName: "Cart" */ '../src/pages/Cart'))

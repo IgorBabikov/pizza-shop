@@ -11,9 +11,7 @@ import { selectPizzas } from '../redux/pizzas/selectors';
 import { selectSort } from '../redux/sort/selectors';
 
 
-import { Categories, Sort, PizzaBlock, Skeleton } from '.';
-import ErrorMessage from '../components/errorMessage/ErrorMessage';
-import Pagination from '../components/Pagination/Pagination';
+import { Categories, Sort, PizzaBlock, Skeleton, ErrorMessage, Pagination } from '../components';
 
 const Home: FC = () => {
   const dispatch = useAppDispatch();
