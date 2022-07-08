@@ -1,12 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { FC } from 'react';
-
+import { selectCart } from '../../redux/cart/selectors';
 import { setDataForm, setMessageForm } from '../../redux/form/slice'
 
 import styles from './form.module.scss';
+
 
 type Data = {
   name: string;
@@ -34,6 +35,8 @@ const MyTextInput: FC<Input> = ({ ...props }) => {
 
 export const FormCart: FC = () => {
   const dispatch = useDispatch();
+
+  const {pizzasCart} = useSelector(selectCart)
 
   const addDataForm = async (obj: Data) => {
     try {
@@ -64,6 +67,7 @@ export const FormCart: FC = () => {
           name: '',
           email: '',
           phone: '',
+          pizza: {...pizzasCart}
         }}
         validationSchema={Yup.object({
           name: Yup.string().min(2, 'Минимум 2 символа!').required('Обязательное поле!'),

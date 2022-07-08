@@ -140,7 +140,7 @@ const Cart: FC = () => {
                   <span>Вернуться назад</span>
                 </Link>
                 <div onClick={showFormCart} className="button pay-btn">
-                  <span>Оплатить сейчас</span>
+                  <span>Оформить заказ</span>
                 </div>
               </div>
             </div>
