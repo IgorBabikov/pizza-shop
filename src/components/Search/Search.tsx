@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useRef, useCallback, useState, FC, ChangeEvent } from 'react';
+import { useRef, useCallback, useState, FC, ChangeEvent, useEffect } from 'react';
 import { setSearch } from '../../redux/sort/slice';
 import { selectSort } from '../../redux/sort/selectors';
 import debounce from 'lodash.debounce';
@@ -7,11 +7,17 @@ import debounce from 'lodash.debounce';
 import style from './search.module.scss';
 
 export const Search: FC = () => {
-  const [value, setValue] = useState<string>('');
   const { search } = useSelector(selectSort);
+  const [value, setValue] = useState<string>('');
 
   const dispatch = useDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (search === "") {
+      setValue('')
+    }
+  }, [search])
 
   const clearInput = () => {
     setValue('');
@@ -31,6 +37,7 @@ export const Search: FC = () => {
     updateSearch(e);
   };
 
+
   return (
     <div className={style.root}>
       <input
@@ -43,7 +50,7 @@ export const Search: FC = () => {
         placeholder="Поиск пиццы..."
       />
 
-      {search ? (
+      {search && value ? (
         <svg
           onClick={clearInput}
           className={style.svg}

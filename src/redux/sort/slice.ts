@@ -32,6 +32,7 @@ const sortSlice = createSlice({
          state.categoryId = action.payload.categoryId
          state.currentPage = action.payload.currentPage
          state.sortBy = action.payload.sortBy
+         state.search = action.payload.search
       }
    }
 })

@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { setAddPizzas } from '../redux/cart/slice';
 import { CartItem } from '../redux/cart/types';
 import { selectCartById } from '../redux/cart/selectors';
+import { selectSort } from '../redux/sort/selectors';
+import { setSearch } from '../redux/sort/slice';
 
 const typePizzaName = ['тонкое', 'традиционное'];
 
@@ -21,6 +23,7 @@ export const PizzaBlock: FC<PizzaBlockProps> = ({ id, imageUrl, title, price, ty
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
+  const { search } = useSelector(selectSort);
   const findPizza = useSelector(selectCartById(id));
 
   const count = findPizza ? findPizza.count : 0;
@@ -44,6 +47,24 @@ export const PizzaBlock: FC<PizzaBlockProps> = ({ id, imageUrl, title, price, ty
   return (
     <div className="pizza-block__wrapper">
       <div className="pizza-block">
+        {search !== '' ? (
+          <svg
+            className="pizza-block__svg"
+            onClick={() => dispatch(setSearch(''))}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        ) : null}
+
         <Link to={`/pizza/${id}`}>
           <img className="pizza-block__image" src={imageUrl} alt={title} />
         </Link>

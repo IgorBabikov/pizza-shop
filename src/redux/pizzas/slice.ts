@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { fetchPizzasArgs, Pizza, PizzaSliceState, Status } from './types';
 
-
 const initialState: PizzaSliceState = {
   pizzas: [],
   status: Status.LOADING,
@@ -10,10 +9,10 @@ const initialState: PizzaSliceState = {
 
 
 export const fetchPizzas = createAsyncThunk<Pizza[], fetchPizzasArgs>('pizzas/fetchPizzas', async (params) => {
-    const { currentPage, category, sorting, order } = params;
+    const { page, category, sorting, order, search } = params;
 
     const { data } = await axios.get<Pizza[]>(
-      `https://62a54ce7430ba53411c504a9.mockapi.io/pizzas-list/?limit=4&page=${currentPage}${category}&sortBy=${sorting}&order=${order}`,
+      `https://62a54ce7430ba53411c504a9.mockapi.io/pizzas-list/?limit=4${page}${category}&sortBy=${sorting}&order=${order}&search=${search}`,
     );
     return data;
   },
@@ -32,7 +31,7 @@ const pizzaSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPizzas.pending, (state) => {
       state.status = Status.LOADING;
-      state.pizzas = [];
+
     });
       builder.addCase(fetchPizzas.fulfilled, (state, action) => {
         state.pizzas = action.payload;

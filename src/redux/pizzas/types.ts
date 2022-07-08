@@ -8,10 +8,11 @@ export type Pizza = {
  };
 
  export type fetchPizzasArgs = {
-    currentPage: number;
+    page: string;
     category: string;
     sorting: string;
     order: string;
+    search: string
   };
 
  export enum Status {
